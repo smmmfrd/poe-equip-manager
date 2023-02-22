@@ -1,0 +1,20 @@
+Item Class: Helmets
+Rarity: Rare
+Miracle Keep
+Samnite Helmet
+--------
+Armour: 388 (augmented)
+--------
+Requirements:
+Level: 55
+Str: 114
+--------
+Sockets: R-R R 
+--------
+Item Level: 56
+--------
++117 to Accuracy Rating
++76 to Armour
++87 to maximum Life
++8% to Fire Resistance
+19% increased Stun and Block Recovery
