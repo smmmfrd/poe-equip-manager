@@ -1,0 +1,39 @@
+Item Class: Helmets
+Rarity: Rare
+Miracle Keep
+
+Item Class: Body Armours
+Rarity: Unique
+Kingsguard
+
+Item Class: Gloves
+Rarity: Magic
+Athlete's Crusader Gloves of Precision
+
+Item Class: Boots
+Rarity: Rare
+Damnation March
+
+Item Class: Belts
+Rarity: Rare
+Beast Buckle
+
+Item Class: Rings
+Rarity: Rare
+Corpse Spiral
+
+Item Class: Amulets
+Rarity: Unique
+Winterheart
+
+Item Class: Bows
+Rarity: Rare
+Rapture Strike
+
+Item Class: Quivers
+Rarity: Unique
+Blackgleam
+
+Item Class: Thrusting One Hand Swords
+Rarity: Magic
+Frigid Burnished Foil of Haemophilia
