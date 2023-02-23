@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef } from "react";
-import ItemImporter from "./ItemImporter";
+import EquipImporter from "./EquipImporter";
 
 function reducer(state, action) {
     switch (action.slot) {
@@ -34,12 +34,13 @@ function reducer(state, action) {
     }
 }
 
-export default function EquipManager() {
-    const [equips, dispatch] = useReducer(reducer, {});
+export default function EquipManager({ currentCharacter }) {
+    const [equips, dispatch] = useReducer(reducer, currentCharacter);
     const itemImporter = useRef(null);
 
     useEffect(() => {
         console.log(equips);
+        localStorage.setItem("TEST CHARACTER", JSON.stringify({name: "TEST CHARACTER", ...equips}));
     }, [equips])
 
     function newEquip(equip) {
@@ -48,8 +49,8 @@ export default function EquipManager() {
 
     return (
         <>
-            <button className="btn btn-primary" onClick={() => itemImporter.current.showModal()}>Import Item (Ctrl + V)</button>
-            <ItemImporter ref={itemImporter} newEquip={newEquip} />
+            <button className="btn btn-primary" onClick={() => { itemImporter.current.showModal(); console.log("pressed me!") }}>Import Item (Ctrl + V)</button>
+            <EquipImporter ref={itemImporter} newEquip={newEquip} />
             <div className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
                 <div className="">
                     <button className="btn btn-outline w-double h-quad">
