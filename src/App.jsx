@@ -7,6 +7,8 @@ export default function App() {
     useEffect(() => {
         async function fetchCharacter() {
             const data = await JSON.parse(localStorage.getItem("TEST CHARACTER"));
+            // localStorage.setItem("TEST CHARACTER", JSON.stringify(data));
+            // console.log(data);
             setCharacter(data);
         }
 

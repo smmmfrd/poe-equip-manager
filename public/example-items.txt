@@ -37,3 +37,19 @@ Blackgleam
 Item Class: Thrusting One Hand Swords
 Rarity: Magic
 Frigid Burnished Foil of Haemophilia
+
+Item Class: Staves
+Rarity: Unique
+Fencoil
+
+Item Class: Two Hand Axes
+Rarity: Unique
+Debeon's Dirge
+
+Item Class: Two Hand Swords
+Rarity: Unique
+Queen's Decree
+
+Item Class: Shields
+Rarity: Rare
+Carrion Wish
