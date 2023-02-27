@@ -4,7 +4,6 @@ import EquipImporter from "./EquipImporter";
 export default function EquipManager({ currentCharacter }) {
     const [equips, dispatch] = useReducer(reducer, currentCharacter);
     const [currentEquip, setCurrentEquip] = useState({});
-    const itemImporter = useRef(null);
 
     function reducer(state, action) {
         switch (action.slot) {
@@ -89,8 +88,7 @@ export default function EquipManager({ currentCharacter }) {
         }
     }, [equips]);
 
-    function openImporter() {
-        itemImporter.current.showModal();
+    function importerOpened() {
         setCurrentEquip({});
     }
 
@@ -125,9 +123,9 @@ export default function EquipManager({ currentCharacter }) {
 
     return (
         <>
-            <button className="btn btn-primary" onClick={openImporter}>{currentEquip.name ? `Select a Slot for ${currentEquip.name}` : "Import Item (Ctrl + V)"}</button>
-
-            <EquipImporter ref={itemImporter} newEquip={newEquip} />
+            <EquipImporter handleOpen={importerOpened} newEquip={newEquip}
+                buttonMessage={currentEquip.name ? `Select a Slot for ${currentEquip.name}` : "Import Item (Ctrl + V)"}
+            />
 
             <div className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
                 <div className="">
