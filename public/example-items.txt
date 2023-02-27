@@ -1,3 +1,12 @@
+----- Notes -----
+Prices:
+    a = Alchemy Orbs
+    c = Chaos Orbs
+    e = Exalted Orbs
+    d = Divine Orbs
+
+-----       -----
+
 Item Class: Helmets
 Rarity: Rare
 Miracle Keep
