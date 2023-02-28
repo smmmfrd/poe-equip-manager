@@ -38,10 +38,22 @@ function formatCost(cost) {
 
 export default function EquipViewer({ equipment }) {
 	const { name: characterName, ...equips } = equipment;
+	const sortedEquips = Object.keys(equips)
+		.map(key => ({ ...equips[key], slot: (key.charAt(0).toUpperCase() + key.slice(1))
+			.split(/(?=[A-Z])/).join(" ") }))
+		.sort((a, b) => {
+			const dateA = Date.parse(a.date);
+			const dateB = Date.parse(b.date);
 
-	const EquipCard = (equipSlot) => {
-		const equip = equips[equipSlot];
-		equip.slot = equipSlot.charAt(0).toUpperCase() + equipSlot.slice(1);
+			if (dateA < dateB) {
+				return 1;
+			} else {
+				return -1;
+			}
+		});
+	console.log(sortedEquips);
+
+	const EquipCard = (equip) => {
 		equip.formattedDate = formatTimeAgo(Date.parse(equip.date));
 
 		return (
@@ -65,14 +77,14 @@ export default function EquipViewer({ equipment }) {
 					<label className="label">
 						<span className="label-text font-bold underline">Sort By:</span>
 					</label>
-					<select className="select select-ghost select-sm">
+					<select defaultValue={0} className="select select-ghost select-sm">
 						<option>Time Acquired</option>
 						<option>Price</option>
 					</select>
 				</div>
 			</div>
 			<div className="p-8 flex flex-col gap-4">
-				{Object.keys(equips).map(EquipCard)}
+				{sortedEquips.map(EquipCard)}
 			</div>
 		</section>
 	);
