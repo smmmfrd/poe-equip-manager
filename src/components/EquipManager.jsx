@@ -1,5 +1,6 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import EquipImporter from "./EquipImporter";
+import EquipViewer from "./EquipViewer";
 
 export default function EquipManager({ currentCharacter }) {
 	const [equips, dispatch] = useReducer(reducer, currentCharacter);
@@ -177,12 +178,12 @@ export default function EquipManager({ currentCharacter }) {
 				</div>
 				<div className="row-start-5 col-start-2">
 					<button className="btn btn-outline w-double h-double" disabled={currentEquip.name}>
-						{equips.gloves ? equips.gloves.name : "No Gloves"}
+						{equips.glove ? equips.glove.name : "No Gloves"}
 					</button>
 				</div>
 				<div className="row-start-5 col-start-6">
 					<button className="btn btn-outline w-double h-double" disabled={currentEquip.name}>
-						{equips.boots ? equips.boots.name : "No Boots"}
+						{equips.boot ? equips.boot.name : "No Boots"}
 					</button>
 				</div>
 				<div className="row-start-6 col-start-4">
@@ -191,6 +192,8 @@ export default function EquipManager({ currentCharacter }) {
 					</button>
 				</div>
 			</div>
+
+			<EquipViewer equipment={equips} />
 		</>
 	);
 }
