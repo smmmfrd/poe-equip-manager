@@ -25,6 +25,16 @@ function formatTimeAgo(date) {
 	}
 }
 
+const CURRENCIES = {
+	a: "Alchemy Orbs",
+	c: "Chaos Orbs",
+	e: "Exalted Orbs",
+	d: "Divine Orbs"
+}
+
+function formatCost(cost) {
+	return `${cost.amount} ${CURRENCIES[cost.currency]}`
+}
 
 export default function EquipViewer({ equipment }) {
 	const { name: characterName, ...equips } = equipment;
@@ -35,13 +45,13 @@ export default function EquipViewer({ equipment }) {
 		equip.formattedDate = formatTimeAgo(Date.parse(equip.date));
 
 		return (
-			<div key={equip.name} className="bg-base-200 border border-base-content rounded p-2">
+			<div key={equip.name} className="bg-base-200 border border-base-300 rounded py-2 px-4 flex flex-col gap-3">
 				{/* SLOT & NAME */}
 				<h3 className="text-2xl font-semibold">
 					{equip.slot} - {equip.name}
 				</h3>
 				<div className="pr-8">
-					{equip.formattedDate} - {JSON.stringify(equip.cost)}
+					{equip.formattedDate} - {formatCost(equip.cost)}
 				</div>
 			</div>
 		);
@@ -49,7 +59,7 @@ export default function EquipViewer({ equipment }) {
 
 	return (
 		<section className="w-full">
-			<h2 className="text-center text-3xl font-bold underline">{characterName}'s Equips</h2>
+			<h2 className="text-center text-3xl font-bold underline mb-4">{characterName}'s Equips</h2>
 			<div className="p-8 flex flex-col gap-4">
 				{Object.keys(equips).map(EquipCard)}
 			</div>
