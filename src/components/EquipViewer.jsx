@@ -59,7 +59,18 @@ export default function EquipViewer({ equipment }) {
 
 	return (
 		<section className="w-full">
-			<h2 className="text-center text-3xl font-bold underline mb-4">{characterName}'s Equips</h2>
+			<div className="w-full flex justify-between items-end">
+				<h2 className="text-center text-4xl font-bold underline mb-1">{characterName}'s Equips</h2>
+				<div className="form-control max-w-xs">
+					<label className="label">
+						<span className="label-text font-bold underline">Sort By:</span>
+					</label>
+					<select className="select select-ghost select-sm">
+						<option>Time Acquired</option>
+						<option>Price</option>
+					</select>
+				</div>
+			</div>
 			<div className="p-8 flex flex-col gap-4">
 				{Object.keys(equips).map(EquipCard)}
 			</div>
