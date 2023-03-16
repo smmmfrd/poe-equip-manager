@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
+import EquipError, {displayError} from "./EquipError";
 import EquipImporter from "./EquipImporter";
 import EquipViewer from "./EquipViewer";
 
@@ -79,7 +80,7 @@ export default function EquipManager({ currentCharacter }) {
 						total[key] = state[key];
 						return total;
 					}, {});
-				
+
 			default:
 				return {
 					...state,
@@ -102,6 +103,15 @@ export default function EquipManager({ currentCharacter }) {
 	}
 
 	function newEquip(equip) {
+		// Check for duplicates
+		const dupe = (newEquip) => Object.keys(equips).
+			some(key => equips[key]?.name === newEquip.name);
+
+		if (dupe(equip)) {
+			displayError();
+			return;
+		}
+
 		dispatch({ slot: equip.slot, item: equip });
 	}
 
@@ -136,6 +146,7 @@ export default function EquipManager({ currentCharacter }) {
 
 	return (
 		<>
+			<EquipError />
 			<EquipImporter handleOpen={importerOpened} newEquip={newEquip}
 				buttonMessage={currentEquip.name ? `Select a Slot for ${currentEquip.name}` : "Import Item (Ctrl + V)"}
 			/>
