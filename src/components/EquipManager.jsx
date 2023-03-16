@@ -70,8 +70,16 @@ export default function EquipManager({ currentCharacter }) {
 					leftRing: action.item
 				}
 			case "Remove Dilemna":
-				const { dilemnaEquip, ...newState } = state;
+				var { dilemnaEquip, ...newState } = state;
 				return newState;
+			case "Delete":
+				return Object.keys(state)
+					.filter(key => state[key]?.name !== action.item.name)
+					.reduce((total, key) => {
+						total[key] = state[key];
+						return total;
+					}, {});
+				
 			default:
 				return {
 					...state,
@@ -95,6 +103,10 @@ export default function EquipManager({ currentCharacter }) {
 
 	function newEquip(equip) {
 		dispatch({ slot: equip.slot, item: equip });
+	}
+
+	function deleteEquip(equip) {
+		dispatch({ slot: "Delete", item: equip });
 	}
 
 	function handleChoiceInput(choice) {
@@ -193,7 +205,7 @@ export default function EquipManager({ currentCharacter }) {
 				</div>
 			</div>
 
-			<EquipViewer equipment={equips} />
+			<EquipViewer equipment={equips} deleteEquip={deleteEquip} />
 		</>
 	);
 }
