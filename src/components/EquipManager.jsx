@@ -1,11 +1,16 @@
 import { useEffect, useReducer, useState } from "react";
-import EquipError, {displayError} from "./EquipError";
+import EquipError, { displayError } from "./EquipError";
 import EquipImporter from "./EquipImporter";
 import EquipViewer from "./EquipViewer";
+
+function validEquip(equip) {
+	return equip.slot.includes('One Hand') || equip.slot.includes('Rings');
+}
 
 export default function EquipManager({ currentCharacter }) {
 	const [equips, dispatch] = useReducer(reducer, currentCharacter);
 	const [currentEquip, setCurrentEquip] = useState({});
+	const [error, setError] = useState('');
 
 	function reducer(state, action) {
 		switch (action.slot) {
@@ -90,8 +95,11 @@ export default function EquipManager({ currentCharacter }) {
 
 	useEffect(() => {
 		if (equips.dilemnaEquip) {
-			console.log(equips.dilemnaEquip);
-			setCurrentEquip(equips.dilemnaEquip);
+			if (validEquip(equips.dilemnaEquip)) setCurrentEquip(equips.dilemnaEquip);
+			else {
+				setError('Error: Invalid Item Detected');
+				displayError();
+			}
 			dispatch({ slot: "Remove Dilemna", item: {} });
 		} else {
 			localStorage.setItem("TEST CHARACTER", JSON.stringify({ name: "TEST CHARACTER", ...equips }));
@@ -108,6 +116,7 @@ export default function EquipManager({ currentCharacter }) {
 			some(key => equips[key]?.name === newEquip.name);
 
 		if (dupe(equip)) {
+			setError('Error: Duplicate Item Detected!');
 			displayError();
 			return;
 		}
@@ -120,7 +129,7 @@ export default function EquipManager({ currentCharacter }) {
 	}
 
 	function handleChoiceInput(choice) {
-		if(Object.keys(currentEquip).length === 0) return;
+		if (Object.keys(currentEquip).length === 0) return;
 
 		switch (choice) {
 			case "main hand":
@@ -148,7 +157,7 @@ export default function EquipManager({ currentCharacter }) {
 
 	return (
 		<>
-			<EquipError />
+			<EquipError error={error} />
 			<EquipImporter handleOpen={importerOpened} newEquip={newEquip}
 				buttonMessage={currentEquip.name ? `Select a Slot for ${currentEquip.name}` : "Import Item (Ctrl + V)"}
 			/>
