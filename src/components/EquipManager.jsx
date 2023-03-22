@@ -80,7 +80,6 @@ export default function EquipManager({ currentCharacter }) {
 						total[key] = state[key];
 						return total;
 					}, {});
-
 			default:
 				return {
 					...state,
@@ -91,6 +90,7 @@ export default function EquipManager({ currentCharacter }) {
 
 	useEffect(() => {
 		if (equips.dilemnaEquip) {
+			console.log(equips.dilemnaEquip);
 			setCurrentEquip(equips.dilemnaEquip);
 			dispatch({ slot: "Remove Dilemna", item: {} });
 		} else {
@@ -120,6 +120,8 @@ export default function EquipManager({ currentCharacter }) {
 	}
 
 	function handleChoiceInput(choice) {
+		if(Object.keys(currentEquip).length === 0) return;
+
 		switch (choice) {
 			case "main hand":
 				if (currentEquip.slot.includes("One Hand")) {
