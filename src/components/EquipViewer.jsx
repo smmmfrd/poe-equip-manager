@@ -60,7 +60,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 
 		return (
 			<div key={equip.name} className="bg-base-200 border border-base-300 rounded py-2 px-4 flex flex-col gap-3 relative">
-				<button onClick={() => deleteEquip(equip)} className="w-10 h-10 min-h-0 absolute right-2 btn btn-circle btn-outline">
+				<button onClick={() => deleteEquip(equip)} title="Delete" className="w-10 h-10 min-h-0 absolute right-2 btn btn-circle btn-outline btn-error">
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
 				</button>
 				{/* SLOT & NAME */}

@@ -16,7 +16,7 @@ export default function App() {
 	}, []);
 
 	return (
-		<main className="mx-auto max-w-2xl pt-10 flex flex-col items-center gap-4">
+		<main className="mx-auto max-w-2xl flex flex-col items-center gap-4">
 			{character.name && <EquipManager currentCharacter={character} />}
 		</main>
 	);
