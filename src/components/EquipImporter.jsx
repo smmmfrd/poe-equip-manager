@@ -23,7 +23,7 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage }) {
 		const data = equipInput.current.value.split('\n')
 			.filter((line) => line !== "")
 			.filter((line, index) => index < 3);
-		
+
 		const item = {
 			slot: data[0].replace('Item Class: ', ''),
 			rarity: data[1].replace('Rarity: ', ''),
@@ -34,7 +34,7 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage }) {
 			},
 			date: new Date(),
 		}
-		
+
 		newEquip(item);
 		close();
 	}
@@ -60,7 +60,7 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage }) {
 							<option value="d">Div</option>
 						</select>
 					</div>
-					<button className="btn block w-full" type="submit">Submit Item (enter)</button>
+					<button className="btn block w-full" type="submit">Submit Item</button>
 				</form>
 			</dialog>
 		</>
