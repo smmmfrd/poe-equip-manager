@@ -155,6 +155,10 @@ export default function EquipManager({ currentCharacter }) {
 		}
 	}
 
+	function handleEquipClick(id) {
+		document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "end" });
+	}
+
 	return (
 		<>
 			<EquipError error={error} />
@@ -163,65 +167,106 @@ export default function EquipManager({ currentCharacter }) {
 			/>
 
 			<div className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
+				{/* MAIN HAND */}
 				<div className="">
 					<button className="btn btn-outline w-double h-quad"
 						disabled={currentEquip.name && !currentEquip.slot.includes('One Hand')}
-						onClick={() => handleChoiceInput("main hand")}
+						onClick={() => currentEquip.name ? handleChoiceInput("main hand") :
+							equips.mainHand ? handleEquipClick(equips.mainHand.id) : null}
 					>
 						{equips.mainHand ? equips.mainHand.name : "No Main Hand"}
 					</button>
 				</div>
+
+				{/* HELMET */}
 				<div className="col-start-4">
-					<button className="btn btn-outline w-double h-double" disabled={currentEquip.name}>
-						{equips.helmet ? equips.helmet.name : "Helmet"}
+					<button className="btn btn-outline w-double h-double"
+						disabled={currentEquip.name}
+						onClick={() => equips.helmet ? handleEquipClick(equips.helmet.id) : null}
+					>
+						{equips.helmet ? equips.helmet.name : "No Helmet"}
 					</button>
 				</div>
+
+				{/* OFF HAND */}
 				<div className="col-start-7">
 					<button className="btn btn-outline w-double h-quad"
 						disabled={currentEquip.name && !currentEquip.slot.includes('One Hand')}
-						onClick={() => handleChoiceInput("off hand")}
+						onClick={() => currentEquip.name ? handleChoiceInput("off hand") :
+							equips.offHand ? handleEquipClick(equips.offHand.id) : null}
 					>
 						{equips.offHand ? equips.offHand.name : "No Off Hand"}
 					</button>
 				</div>
+
+				{/* BODY ARMOUR */}
 				<div className="row-start-3 col-start-4">
-					<button className="btn btn-outline w-double h-triple" disabled={currentEquip.name}>
+					<button className="btn btn-outline w-double h-triple"
+						disabled={currentEquip.name}
+						onClick={() => equips.bodyArmour ? handleEquipClick(equips.bodyArmour.id) : null}
+					>
 						{equips.bodyArmour ? equips.bodyArmour.name : "No Body Armour"}
 					</button>
 				</div>
+
+				{/* AMULET */}
 				<div className="row-start-3 col-start-6">
-					<button className="btn btn-outline w-full h-full" disabled={currentEquip.name}>
+					<button className="btn btn-outline w-full h-full"
+						disabled={currentEquip.name}
+						onClick={() => equips.amulet ? handleEquipClick(equips.amulet.id) : null}
+					>
 						{equips.amulet ? equips.amulet.name : "No Amulet"}
 					</button>
 				</div>
+
+				{/* LEFT RING */}
 				<div className="row-start-4 col-start-3">
 					<button className="btn btn-outline w-full h-full"
 						disabled={currentEquip.name && !currentEquip.slot.includes('Rings')}
-						onClick={() => handleChoiceInput("left ring")}
+						onClick={() => currentEquip.name ? handleChoiceInput("left ring") :
+							equips.leftRing ? handleEquipClick(equips.leftRing.id) : null}
 					>
 						{equips.leftRing ? equips.leftRing.name : "No Left Ring"}
 					</button>
 				</div>
+
+				{/* RIGHT RING */}
 				<div className="row-start-4 col-start-6">
 					<button className="btn btn-outline w-full h-full"
 						disabled={currentEquip.name && !currentEquip.slot.includes('Rings')}
-						onClick={() => handleChoiceInput("right ring")}
+						onClick={() => currentEquip.name ? handleChoiceInput("right ring") :
+							equips.rightRing ? handleEquipClick(equips.rightRing.id) : null}
 					>
 						{equips.rightRing ? equips.rightRing.name : "No Right Ring"}
 					</button>
 				</div>
+
+				{/* GLOVES */}
 				<div className="row-start-5 col-start-2">
-					<button className="btn btn-outline w-double h-double" disabled={currentEquip.name}>
+					<button className="btn btn-outline w-double h-double"
+						disabled={currentEquip.name}
+						onClick={() => equips.glove ? handleEquipClick(equips.glove.id) : null}
+					>
 						{equips.glove ? equips.glove.name : "No Gloves"}
 					</button>
 				</div>
+
+				{/* BOOTS */}
 				<div className="row-start-5 col-start-6">
-					<button className="btn btn-outline w-double h-double" disabled={currentEquip.name}>
+					<button className="btn btn-outline w-double h-double"
+						disabled={currentEquip.name}
+						onClick={() => equips.boot ? handleEquipClick(equips.boot.id) : null}
+					>
 						{equips.boot ? equips.boot.name : "No Boots"}
 					</button>
 				</div>
+
+				{/* BELT */}
 				<div className="row-start-6 col-start-4">
-					<button className="btn btn-outline w-double h-full" disabled={currentEquip.name}>
+					<button className="btn btn-outline w-double h-full"
+						disabled={currentEquip.name}
+						onClick={() => equips.belt ? handleEquipClick(equips.belt.id) : null}
+					>
 						{equips.belt ? equips.belt.name : "No Belt"}
 					</button>
 				</div>

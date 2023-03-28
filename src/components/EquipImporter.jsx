@@ -25,6 +25,7 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage }) {
 			.filter((line, index) => index < 3);
 
 		const item = {
+			id: new Date().getTime(),
 			slot: data[0].replace('Item Class: ', ''),
 			rarity: data[1].replace('Rarity: ', ''),
 			name: data[2],
@@ -52,7 +53,7 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage }) {
 				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 					<textarea name="equip" ref={equipInput} className="textarea textarea-bordered resize-none" cols="30" rows="10"></textarea>
 					<div className="flex gap-4">
-						<input type="number" name="amount" defaultValue={1} className="input input-bordered" />
+						<input type="number" name="amount" defaultValue={1} min={1} className="input input-bordered" />
 						<select name="currency" className="select select-bordered">
 							<option value="a">Alch</option>
 							<option value="c">Chaos</option>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const DATE_FORMATTER = new Intl.RelativeTimeFormat(undefined, {
 	numeric: 'auto'
@@ -78,6 +78,7 @@ function sortByPrice(a, b) {
 
 export default function EquipViewer({ equipment, deleteEquip }) {
 	const [sortMethod, setSortMethod] = useState("time");
+	const equipRefs = useRef([]);
 
 	const { name: characterName, ...equips } = equipment;
 	const sortedEquips = Object.keys(equips)
@@ -92,7 +93,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 		equip.formattedDate = formatTimeAgo(Date.parse(equip.date));
 
 		return (
-			<div key={equip.name} className="bg-base-200 border border-base-300 rounded py-2 px-4 flex flex-col gap-3 relative">
+			<div key={equip.name} id={equip.id} className="bg-base-200 border border-base-300 rounded py-2 px-4 flex flex-col gap-3 relative">
 				<button onClick={() => deleteEquip(equip)} title="Delete" className="w-10 h-10 min-h-0 absolute right-2 btn btn-circle btn-outline btn-error">
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
 				</button>
@@ -115,7 +116,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 					<label className="label">
 						<span className="label-text font-bold underline">Sort By:</span>
 					</label>
-					<select defaultValue="time" value={sortMethod} onChange={(e) => setSortMethod(e.target.value)} className="select select-sm">
+					<select defaultValue="time" value={sortMethod} onChange={(e) => setSortMethod(e.target.value)} className="select select-primary">
 						<option value="time">Time Acquired</option>
 						<option value="price">Price</option>
 					</select>
