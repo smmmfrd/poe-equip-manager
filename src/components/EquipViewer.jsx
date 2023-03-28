@@ -36,6 +36,44 @@ function formatCost(cost) {
 	return `${cost.amount} ${CURRENCIES[cost.currency]}`
 }
 
+function sortByDate(a, b) {
+	const dateA = Date.parse(a.date);
+	const dateB = Date.parse(b.date);
+
+	if (dateA < dateB) {
+		return 1;
+	} else {
+		return -1;
+	}
+}
+
+const PRICES = {
+	a: 0,
+	c: 1,
+	e: 2,
+	d: 3
+}
+
+function sortByPrice(a, b) {
+	const aCost = a.cost;
+	const bCost = b.cost;
+
+	if (PRICES[aCost.currency] > PRICES[bCost.currency]) {
+		return 1;
+	} else if (PRICES[aCost.currency] === PRICES[bCost.currency]) {
+		// They have the same currency type...
+		if (aCost.amount > bCost.amount) {
+			return 1;
+		} else if (aCost.amount === bCost.amount) {
+			return sortByDate(a, b);
+		} else {
+			return -1;
+		}
+	} else {
+		return -1;
+	}
+}
+
 export default function EquipViewer({ equipment, deleteEquip }) {
 	const { name: characterName, ...equips } = equipment;
 	const sortedEquips = Object.keys(equips)
@@ -43,16 +81,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 			...equips[key], slot: (key.charAt(0).toUpperCase() + key.slice(1))
 				.split(/(?=[A-Z])/).join(" ")
 		}))
-		.sort((a, b) => {
-			const dateA = Date.parse(a.date);
-			const dateB = Date.parse(b.date);
-
-			if (dateA < dateB) {
-				return 1;
-			} else {
-				return -1;
-			}
-		});
+		.sort(sortByPrice);
 	// console.log(sortedEquips);
 
 	const EquipCard = (equip) => {
