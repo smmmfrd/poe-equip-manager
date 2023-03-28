@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const DATE_FORMATTER = new Intl.RelativeTimeFormat(undefined, {
 	numeric: 'auto'
 });
@@ -75,13 +77,15 @@ function sortByPrice(a, b) {
 }
 
 export default function EquipViewer({ equipment, deleteEquip }) {
+	const [sortMethod, setSortMethod] = useState("time");
+
 	const { name: characterName, ...equips } = equipment;
 	const sortedEquips = Object.keys(equips)
 		.map(key => ({
 			...equips[key], slot: (key.charAt(0).toUpperCase() + key.slice(1))
 				.split(/(?=[A-Z])/).join(" ")
 		}))
-		.sort(sortByPrice);
+		.sort((a,b) => sortMethod === "time" ? sortByDate(a,b) : sortByPrice(a,b));
 	// console.log(sortedEquips);
 
 	const EquipCard = (equip) => {
@@ -111,9 +115,9 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 					<label className="label">
 						<span className="label-text font-bold underline">Sort By:</span>
 					</label>
-					<select defaultValue={0} className="select select-ghost select-sm">
-						<option>Time Acquired</option>
-						<option>Price</option>
+					<select defaultValue="time" value={sortMethod} onChange={(e) => setSortMethod(e.target.value)} className="select select-sm">
+						<option value="time">Time Acquired</option>
+						<option value="price">Price</option>
 					</select>
 				</div>
 			</div>
