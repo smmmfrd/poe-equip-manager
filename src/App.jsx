@@ -16,7 +16,7 @@ export default function App() {
 		// fetchCharacter();
 	}, []);
 
-	function newCharacter(name) {
+	function characterChosen(name) {
 		console.log(name);
 	}
 
@@ -26,7 +26,9 @@ export default function App() {
 				<EquipManager
 					currentCharacter={character}
 				/> :
-				<CharacterSelect newCharacter={newCharacter} />
+				<CharacterSelect
+					characterChosen={characterChosen}
+				/>
 			}
 		</main>
 	);
