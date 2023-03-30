@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CharacterSelect from "./components/CharacterSelect";
 import EquipManager from "./components/EquipManager";
 
 export default function App() {
@@ -12,12 +13,21 @@ export default function App() {
 			setCharacter(data);
 		}
 
-		fetchCharacter();
+		// fetchCharacter();
 	}, []);
+
+	function newCharacter(name) {
+		console.log(name);
+	}
 
 	return (
 		<main className="mx-auto max-w-2xl flex flex-col items-center gap-4">
-			{character.name && <EquipManager currentCharacter={character} />}
+			{character.name ?
+				<EquipManager
+					currentCharacter={character}
+				/> :
+				<CharacterSelect newCharacter={newCharacter} />
+			}
 		</main>
 	);
 } 
