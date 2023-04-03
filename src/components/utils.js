@@ -13,7 +13,8 @@ const DIVISIONS = [
 	{ amount: Number.POSITIVE_INFINITY, name: 'years' }
 ];
 
-export function formatTimeAgo(date) {
+export function formatTimeAgo(strDate) {
+	let date = Date.parse(strDate);
 	let duration = (date - new Date()) / 1000;
 
 	for (let i = 0; i < DIVISIONS.length; i++) {

@@ -63,7 +63,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 		.sort((a, b) => sortMethod === "time" ? sortByDate(a, b) : sortByPrice(a, b));
 
 	const EquipCard = (equip) => {
-		equip.formattedDate = formatTimeAgo(Date.parse(equip.date));
+		equip.formattedDate = formatTimeAgo(equip.date);
 
 		return (
 			<div key={equip.name} id={equip.id} className="bg-base-200 border border-base-300 rounded py-2 px-4 flex flex-col gap-3 relative">
