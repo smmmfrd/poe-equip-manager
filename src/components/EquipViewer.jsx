@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { formatTimeAgo } from "./utils";
 
 const CURRENCIES = {
@@ -52,15 +52,15 @@ function sortByPrice(a, b) {
 
 export default function EquipViewer({ equipment, deleteEquip }) {
 	const [sortMethod, setSortMethod] = useState("time");
-	const equipRefs = useRef([]);
-
-	const { name: characterName, dateCreated, ...equips } = equipment;
+	const { name: characterName, dateCreated: _, ...equips } = equipment;
+	console.log("coming in:", equipment, "getting fed: ", equips);
+	
 	const sortedEquips = Object.keys(equips)
 		.map(key => ({
 			...equips[key], slot: (key.charAt(0).toUpperCase() + key.slice(1))
 				.split(/(?=[A-Z])/).join(" ")
 		}))
-		.sort((a,b) => sortMethod === "time" ? sortByDate(a,b) : sortByPrice(a,b));
+		.sort((a, b) => sortMethod === "time" ? sortByDate(a, b) : sortByPrice(a, b));
 
 	const EquipCard = (equip) => {
 		equip.formattedDate = formatTimeAgo(Date.parse(equip.date));

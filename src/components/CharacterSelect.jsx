@@ -42,10 +42,9 @@ export default function CharacterSelect({ characterChosen }) {
 
 	function CharacterItem(char) {
 		return (
-			<li key={char} className="group btn w-max mx-auto">
+			<li key={char} className="group btn w-max mx-auto" onClick={() => characterChosen(char)}>
 				<button
 					key={char}
-					onClick={() => characterChosen(char)}
 					className="font-semibold text-lg flex items-center"
 				>
 					{char}

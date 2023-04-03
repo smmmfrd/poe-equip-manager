@@ -16,8 +16,9 @@ export default function App() {
 		var charData = localStorage.getItem(name);
 		if (charData === null) {
 			charData = newCharacter(name);
+		} else {
+			charData = JSON.parse(charData);
 		}
-		console.log(`${name}'s data:`, charData);
 		setCharacter(charData);
 	}
 
@@ -27,7 +28,7 @@ export default function App() {
 
 	return (
 		<main className="mx-auto max-w-2xl flex flex-col items-center gap-4">
-			{character.name ?
+			{Object.keys(character).length > 0 ?
 				<EquipManager
 					currentCharacter={character}
 					closeCharacter={closeCharacter}

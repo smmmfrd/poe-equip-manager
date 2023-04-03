@@ -103,7 +103,11 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 			}
 			dispatch({ slot: "Remove Dilemna", item: {} });
 		} else {
-			localStorage.setItem("TEST CHARACTER", JSON.stringify({ name: "TEST CHARACTER", ...equips }));
+			localStorage.setItem(currentCharacter.name, JSON.stringify({
+				name: currentCharacter.name,
+				dateCreated: currentCharacter.dateCreated,
+				...equips
+			}));
 		}
 	}, [equips]);
 
@@ -159,11 +163,11 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 	function handleEquipClick(id) {
 		document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "end" });
 	}
-	
+
 	return (
 		<>
 			<EquipError error={error} />
-			<EquipImporter 
+			<EquipImporter
 				handleOpen={importerOpened}
 				newEquip={newEquip}
 				buttonMessage={currentEquip.name ? `Select a Slot for ${currentEquip.name}` : "Import Item (Ctrl + V)"}
@@ -283,7 +287,8 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 			</div>
 
 			<EquipViewer equipment={equips} deleteEquip={deleteEquip} />
-			<CharacterData equips={equips} />
+
+			<CharacterData data={equips} />
 		</>
 	);
 }
