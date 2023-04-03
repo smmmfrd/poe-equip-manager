@@ -1,31 +1,5 @@
 import { useRef, useState } from "react";
-
-const DATE_FORMATTER = new Intl.RelativeTimeFormat(undefined, {
-	numeric: 'auto'
-});
-
-// From Web Dev Simplified - https://blog.webdevsimplified.com/2020-07/relative-time-format/
-const DIVISIONS = [
-	{ amount: 60, name: 'seconds' },
-	{ amount: 60, name: 'minutes' },
-	{ amount: 24, name: 'hours' },
-	{ amount: 7, name: 'days' },
-	{ amount: 4.34524, name: 'weeks' },
-	{ amount: 12, name: 'months' },
-	{ amount: Number.POSITIVE_INFINITY, name: 'years' }
-];
-
-function formatTimeAgo(date) {
-	let duration = (date - new Date()) / 1000;
-
-	for (let i = 0; i < DIVISIONS.length; i++) {
-		const division = DIVISIONS[i]
-		if (Math.abs(duration) < division.amount) {
-			return DATE_FORMATTER.format(Math.round(duration), division.name);
-		}
-		duration /= division.amount;
-	}
-}
+import { formatTimeAgo } from "./utils";
 
 const CURRENCIES = {
 	a: "Alchemy Orbs",
@@ -80,14 +54,13 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 	const [sortMethod, setSortMethod] = useState("time");
 	const equipRefs = useRef([]);
 
-	const { name: characterName, ...equips } = equipment;
+	const { name: characterName, dateCreated, ...equips } = equipment;
 	const sortedEquips = Object.keys(equips)
 		.map(key => ({
 			...equips[key], slot: (key.charAt(0).toUpperCase() + key.slice(1))
 				.split(/(?=[A-Z])/).join(" ")
 		}))
 		.sort((a,b) => sortMethod === "time" ? sortByDate(a,b) : sortByPrice(a,b));
-	// console.log(sortedEquips);
 
 	const EquipCard = (equip) => {
 		equip.formattedDate = formatTimeAgo(Date.parse(equip.date));

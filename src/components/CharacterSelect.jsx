@@ -46,7 +46,7 @@ export default function CharacterSelect({ characterChosen }) {
 				<button
 					key={char}
 					onClick={() => characterChosen(char)}
-					className="font-semibold text-lg flex"
+					className="font-semibold text-lg flex items-center"
 				>
 					{char}
 					<div

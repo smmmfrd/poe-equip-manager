@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
+import CharacterData from "./CharacterData";
 import EquipError, { displayError } from "./EquipError";
 import EquipImporter from "./EquipImporter";
 import EquipViewer from "./EquipViewer";
@@ -282,15 +283,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 			</div>
 
 			<EquipViewer equipment={equips} deleteEquip={deleteEquip} />
-			<div className="w-11/12 p-4 mb-28 bg-primary rounded-lg text-secondary">
-				<h2 className="text-4xl underline">{equips.name}</h2>
-				<p>Age - ???</p>
-				<h3 className="text-2xl underline">Total Cost</h3>
-				<p>1 Alch</p>
-				<p>1 Chaos</p>
-				<p>1 Exalted</p>
-				<p>1 Divine</p>
-			</div>
+			<CharacterData equips={equips} />
 		</>
 	);
 }

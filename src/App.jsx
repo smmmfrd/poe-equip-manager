@@ -4,7 +4,8 @@ import EquipManager from "./components/EquipManager";
 
 export function newCharacter(name) {
 	return {
-		name
+		name,
+		dateCreated: new Date()
 	}
 }
 
