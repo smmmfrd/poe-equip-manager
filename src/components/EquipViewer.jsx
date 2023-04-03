@@ -116,7 +116,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 					<label className="label">
 						<span className="label-text font-bold underline">Sort By:</span>
 					</label>
-					<select defaultValue="time" value={sortMethod} onChange={(e) => setSortMethod(e.target.value)} className="select select-primary">
+					<select value={sortMethod} onChange={(e) => setSortMethod(e.target.value)} className="select select-primary">
 						<option value="time">Time Acquired</option>
 						<option value="price">Price</option>
 					</select>

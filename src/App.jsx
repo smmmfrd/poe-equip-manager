@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CharacterSelect from "./components/CharacterSelect";
 import EquipManager from "./components/EquipManager";
+
+export function newCharacter(name) {
+	return {
+		name
+	}
+}
 
 export default function App() {
 	const [character, setCharacter] = useState({});
 
-	useEffect(() => {
-		async function fetchCharacter() {
-			const data = await JSON.parse(localStorage.getItem("TEST CHARACTER"));
-			// localStorage.setItem("TEST CHARACTER", JSON.stringify({name: "TEST CHARACTER"}));
-			// console.log(data);
-			setCharacter(data);
-		}
-
-		// fetchCharacter();
-	}, []);
-
 	function characterChosen(name) {
-		console.log(name);
+		var charData = localStorage.getItem(name);
+		if (charData === null) {
+			charData = newCharacter(name);
+		}
+		console.log(`${name}'s data:`, charData);
+		setCharacter(charData);
 	}
 
 	return (
