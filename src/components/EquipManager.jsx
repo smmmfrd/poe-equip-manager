@@ -7,7 +7,7 @@ function validEquip(equip) {
 	return equip.slot.includes('One Hand') || equip.slot.includes('Rings');
 }
 
-export default function EquipManager({ currentCharacter }) {
+export default function EquipManager({ currentCharacter, closeCharacter }) {
 	const [equips, dispatch] = useReducer(reducer, currentCharacter);
 	const [currentEquip, setCurrentEquip] = useState({});
 	const [error, setError] = useState('');
@@ -162,9 +162,18 @@ export default function EquipManager({ currentCharacter }) {
 	return (
 		<>
 			<EquipError error={error} />
-			<EquipImporter handleOpen={importerOpened} newEquip={newEquip}
+			<EquipImporter 
+				handleOpen={importerOpened}
+				newEquip={newEquip}
 				buttonMessage={currentEquip.name ? `Select a Slot for ${currentEquip.name}` : "Import Item (Ctrl + V)"}
-			/>
+			>
+				<button
+					className="btn btn-circle btn-outline btn-sm absolute top-0 -right-48"
+					onClick={closeCharacter}
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+				</button>
+			</EquipImporter>
 
 			<div className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
 				{/* MAIN HAND */}

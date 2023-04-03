@@ -20,11 +20,16 @@ export default function App() {
 		setCharacter(charData);
 	}
 
+	function closeCharacter() {
+		setCharacter({});
+	}
+
 	return (
 		<main className="mx-auto max-w-2xl flex flex-col items-center gap-4">
 			{character.name ?
 				<EquipManager
 					currentCharacter={character}
+					closeCharacter={closeCharacter}
 				/> :
 				<CharacterSelect
 					characterChosen={characterChosen}

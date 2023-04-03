@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function EquipImporter({ handleOpen, newEquip, buttonMessage }) {
+export default function EquipImporter({ handleOpen, newEquip, buttonMessage, children }) {
 	const inputModal = useRef(null);
 	const equipInput = useRef(null);
 
@@ -42,7 +42,10 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage }) {
 
 	return (
 		<>
-			<button className="btn btn-primary" onClick={open}>{buttonMessage}</button>
+			<header className="relative">
+				<button className="btn btn-primary" onClick={open}>{buttonMessage}</button>
+				{children}
+			</header>
 
 			<dialog ref={inputModal} className="rounded-2xl relative p-10">
 
