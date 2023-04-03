@@ -53,7 +53,6 @@ function sortByPrice(a, b) {
 export default function EquipViewer({ equipment, deleteEquip }) {
 	const [sortMethod, setSortMethod] = useState("time");
 	const { name: characterName, dateCreated: _, ...equips } = equipment;
-	console.log("coming in:", equipment, "getting fed: ", equips);
 	
 	const sortedEquips = Object.keys(equips)
 		.map(key => ({

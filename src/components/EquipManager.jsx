@@ -96,8 +96,12 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 
 	useEffect(() => {
 		if (equips.dilemnaEquip) {
-			if (validEquip(equips.dilemnaEquip)) setCurrentEquip(equips.dilemnaEquip);
-			else {
+			if (validEquip(equips.dilemnaEquip)) {
+				setCurrentEquip(equips.dilemnaEquip);
+			} else if(equips.dilemnaEquip.slot.includes('Two Hand')) {
+				dispatch({slot: "Main Hand", item: equips.dilemnaEquip});
+			} else {
+				console.log(equips.dilemnaEquip);
 				setError('Error: Invalid Item Detected');
 				displayError();
 			}
