@@ -41,10 +41,23 @@ export default function CharacterSelect({ characterChosen }) {
 
 				<form onSubmit={characterCreate}>
 					<h2>Make a Character</h2>
-					<label>
-						Name:
-						<input ref={nameInput} className="input" />
-					</label>
+					<div className="">
+						<label>
+							Name:
+							<input
+								type="text"
+								ref={nameInput}
+								pattern="[a-zA-Z]{7,23}"
+								minLength={7}
+								maxLength={23}
+								placeholder="..."
+								className="input peer"
+							/>
+							<p className="peer-invalid:visible invisible">
+								Please enter a valid name, 7-23 characters only.
+							</p>
+						</label>
+					</div>
 					<button type="submit" className="btn">Create Character</button>
 				</form>
 			</dialog>
@@ -52,7 +65,7 @@ export default function CharacterSelect({ characterChosen }) {
 			<button className="btn" onClick={openCreateMenu}>Make a New Character</button>
 
 			{characterList.length > 0 ?
-				<ul>
+				<ul className="flex flex-col gap-8 text-center">
 					{characterList.map(char => (
 						<li key={char}>
 							<button
