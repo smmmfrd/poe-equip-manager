@@ -6,10 +6,11 @@ export default function CharacterSelect({ characterChosen }) {
 	const [characterList, setCharacterList] = useState([]);
 
 	useEffect(() => {
-
+		const storageData = localStorage.getItem("characters");
+		const characterNames = JSON.parse(storageData);
+		setCharacterList(characterNames);
 	}, []);
 
-	var characterData = localStorage.getItem("characters");
 
 	function openCreateMenu() {
 		createMenu.current.showModal();
@@ -24,7 +25,7 @@ export default function CharacterSelect({ characterChosen }) {
 
 		const newList = [...characterList, nameInput.current.value];
 		setCharacterList(newList);
-		localStorage.setItem("characters", newList);
+		localStorage.setItem("characters", JSON.stringify(newList));
 
 		nameInput.current.value = "";
 		closeCreateMenu();
@@ -50,11 +51,10 @@ export default function CharacterSelect({ characterChosen }) {
 			<h1>Pick a character</h1>
 			<button className="btn" onClick={openCreateMenu}>Make a New Character</button>
 
-			{characterData === null ?
-				<p className="text-neutral-content">No Characters</p> :
+			{characterList.length > 0 ?
 				<ul>
 					{characterList.map(char => (
-						<li>
+						<li key={char}>
 							<button
 								key={char}
 								onClick={() => characterChosen(char)}
@@ -64,7 +64,8 @@ export default function CharacterSelect({ characterChosen }) {
 							</button>
 						</li>
 					))}
-				</ul>
+				</ul> :
+				<p className="text-neutral-content">No Characters</p>
 			}
 		</>
 	)
