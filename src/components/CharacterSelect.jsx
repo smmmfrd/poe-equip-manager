@@ -6,9 +6,14 @@ export default function CharacterSelect({ characterChosen }) {
 	const [characterList, setCharacterList] = useState([]);
 
 	useEffect(() => {
-		const storageData = localStorage.getItem("characters");
-		const characterNames = JSON.parse(storageData);
-		setCharacterList(characterNames);
+		if (localStorage.getItem("characters") !== null) {
+			const storageData = localStorage.getItem("characters");
+			const characterNames = JSON.parse(storageData);
+			setCharacterList(characterNames);
+		}
+		else {
+			setCharacterList([]);
+		}
 	}, []);
 
 
