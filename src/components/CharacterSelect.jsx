@@ -2,8 +2,11 @@ import { useState, useRef, useEffect } from "react";
 
 export default function CharacterSelect({ characterChosen }) {
 	const createMenu = useRef();
+	const confirmMenu = useRef();
 	const nameInput = useRef();
+
 	const [characterList, setCharacterList] = useState([]);
+	const [deleteChar, setDeleteChar] = useState("");
 
 	useEffect(() => {
 		if (localStorage.getItem("characters") !== null) {
@@ -36,7 +39,16 @@ export default function CharacterSelect({ characterChosen }) {
 		closeCreateMenu();
 	}
 
-	function deleteCharacter(e, name) {
+	function openConfirmMenu() {
+		confirmMenu.current.showModal();
+	}
+
+	function closeConfirmMenu() {
+		confirmMenu.current.close();
+		setDeleteChar("");
+	}
+
+	function deleteCharacter(name) {
 		console.log('Deleting: ', name);
 
 		const newList = characterList.filter(char => char !== name);
@@ -46,7 +58,8 @@ export default function CharacterSelect({ characterChosen }) {
 
 	function confirmDelete(e, char) {
 		e.stopPropagation();
-
+		openConfirmMenu();
+		setDeleteChar(char);
 	}
 
 	function CharacterItem(char) {
@@ -76,39 +89,67 @@ export default function CharacterSelect({ characterChosen }) {
 		<>
 			<dialog ref={createMenu} className="rounded-2xl relative pt-4 pb-10 px-6">
 				{/* CLOSE BUTTON */}
-				<button 
+				<button
 					title="Cancel"
-					className="btn btn-circle btn-outline btn-sm absolute top-2 left-2" 
+					className="btn btn-circle btn-outline btn-sm absolute top-2 left-2"
 					onClick={closeCreateMenu}>
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
 				</button>
 
 				<form onSubmit={characterCreate} className="flex flex-col items-center">
 					<h2 className="text-base-content text-3xl underline bold mb-8">Add a Character</h2>
-						<label className="flex flex-col items-center">
-							<span className="block text-xl text-base-content">
-								Name:
-							</span>
-							<input
-								type="text"
-								ref={nameInput}
-								pattern="[a-zA-Z]{7,23}"
-								minLength={7}
-								maxLength={23}
-								placeholder=""
-								className="input peer"
-							/>
-							<p className="peer-invalid:visible invisible w-56 text-center text-warning pt-1 pb-4">
-								Please enter a valid name, 7-23 characters only.
-							</p>
-						</label>
-					<button 
+					<label className="flex flex-col items-center">
+						<span className="block text-xl text-base-content">
+							Name:
+						</span>
+						<input
+							type="text"
+							ref={nameInput}
+							pattern="[a-zA-Z]{7,23}"
+							minLength={7}
+							maxLength={23}
+							placeholder=""
+							className="input peer"
+						/>
+						<p className="peer-invalid:visible invisible w-56 text-center text-warning pt-1 pb-4">
+							Please enter a valid name, 7-23 characters only.
+						</p>
+					</label>
+					<button
 						title="Create"
-						type="submit" 
+						type="submit"
 						className="btn">
 						Create Character</button>
 				</form>
 			</dialog>
+
+			<dialog ref={confirmMenu}
+				className="rounded-2xl px-6 py-6">
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						closeConfirmMenu();
+					}}
+					className="flex flex-col gap-8 items-center"
+				>
+					<header className="text-base-content">
+						<h2 className="text-2xl underline bold">Deleting a Character...</h2>
+						<p className="w-64">Doing so will permanently erase all data associated with it.</p>
+					</header>
+					<button className="btn btn-error"
+						onClick={() => deleteCharacter(deleteChar)}
+						title="Confirm Deletion"
+						type="submit">
+						Delete - {deleteChar}
+					</button>
+					<button className="btn btn-secondary"
+						title="Cancel"
+						onClick={closeConfirmMenu}>
+						Cancel
+					</button>
+				</form>
+			</dialog>
+
 			<button className="mt-8 btn" onClick={openCreateMenu}>Make a New Character</button>
 
 			{characterList.length > 0 ?
