@@ -66,8 +66,8 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 
 		return (
 			<div key={equip.name} id={equip.id} className="bg-base-200 border border-base-300 rounded py-2 px-4 flex flex-col gap-3 relative">
-				<button onClick={() => deleteEquip(equip)} title="Delete" className="w-10 h-10 min-h-0 absolute right-2 btn btn-circle btn-outline btn-error">
-					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+				<button onClick={() => deleteEquip(equip)} title="Delete" className="w-10 h-10 min-h-0 absolute right-2 top-5 btn btn-circle btn-outline btn-error">
+					<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-current" fill="none" viewBox="0 0 24 24"><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>
 				</button>
 				{/* SLOT & NAME */}
 				<h3 className="text-2xl font-semibold">
@@ -81,7 +81,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 	}
 
 	return (
-		<section className="w-full">
+		<section className="w-full mb-28">
 			<div className="w-full flex justify-between items-end">
 				<h2 className="text-center text-4xl font-bold underline mb-1">{characterName}'s Equips</h2>
 				<div className="form-control max-w-xs">

@@ -57,11 +57,11 @@ export default function CharacterSelect({ characterChosen }) {
 						className="group-hover:opacity-100 opacity-30 transition-opacity duration-200 divider divider-horizontal"
 					></div>
 					<span
-						className="group-hover:opacity-100 opacity-30 transition-opacity duration-200 btn btn-circle btn-outline btn-xs"
+						className="group-hover:opacity-100 opacity-30 transition-opacity duration-200 btn btn-circle btn-outline btn-error btn-xs"
 						title="Delete this Character"
 						onClick={(e) => deleteCharacter(e, char)}
 					>
-						<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 fill-current" fill="none" viewBox="0 0 24 24"><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>
 					</span>
 				</button>
 			</li>
