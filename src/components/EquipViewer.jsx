@@ -67,7 +67,7 @@ export default function EquipViewer({ equipment, deleteEquip }) {
 		}))
 		.concat(jewelData)
 		.sort((a, b) => sortMethod === "time" ? sortByDate(a, b) : sortByPrice(a, b));
-	console.log(sortedEquips);
+	
 	const EquipCard = (equip) => {
 		equip.formattedDate = formatTimeAgo(equip.date);
 

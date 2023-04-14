@@ -76,7 +76,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 					...state,
 					leftRing: action.item
 				}
-			case "Jewel": 
+			case "Jewel":
 				return {
 					...state,
 					jewels: state.jewels ? [...state.jewels, action.item] : [action.item]
@@ -85,12 +85,19 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				var { dilemnaEquip, ...newState } = state;
 				return newState;
 			case "Delete":
-				return Object.keys(state)
-					.filter(key => state[key]?.name !== action.item.name)
-					.reduce((total, key) => {
-						total[key] = state[key];
-						return total;
-					}, {});
+				if (action.item.slot !== 'Jewel') {
+					return Object.keys(state)
+						.filter(key => state[key]?.name !== action.item.name)
+						.reduce((total, key) => {
+							total[key] = state[key];
+							return total;
+						}, {});
+				} else {
+					return {
+						...state,
+						jewels: state.jewels.filter(jewel => jewel.id !== action.item.id)
+					}
+				}
 			default:
 				return {
 					...state,
@@ -103,8 +110,8 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 		if (equips.dilemnaEquip) {
 			if (validEquip(equips.dilemnaEquip)) {
 				setCurrentEquip(equips.dilemnaEquip);
-			} else if(equips.dilemnaEquip.slot.includes('Two Hand')) {
-				dispatch({slot: "Main Hand", item: equips.dilemnaEquip});
+			} else if (equips.dilemnaEquip.slot.includes('Two Hand')) {
+				dispatch({ slot: "Main Hand", item: equips.dilemnaEquip });
 			} else {
 				console.log(equips.dilemnaEquip);
 				setError('Error: Invalid Item Detected');
@@ -295,7 +302,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 					</button>
 				</div>
 			</div>
-			
+
 			<CharacterData data={equips} />
 
 			<EquipViewer equipment={equips} deleteEquip={deleteEquip} />
