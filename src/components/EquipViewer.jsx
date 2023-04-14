@@ -53,14 +53,21 @@ function sortByPrice(a, b) {
 export default function EquipViewer({ equipment, deleteEquip }) {
 	const [sortMethod, setSortMethod] = useState("time");
 	const { name: characterName, dateCreated: _, ...equips } = equipment;
-	
+
+	const jewelData = equips.jewels ? equips.jewels.map(jewel => ({
+		...jewel,
+		slot: 'Jewel'
+	})) : [];
 	const sortedEquips = Object.keys(equips)
+		.filter(key => key !== 'jewels')
 		.map(key => ({
-			...equips[key], slot: (key.charAt(0).toUpperCase() + key.slice(1))
+			...equips[key],
+			slot: (key.charAt(0).toUpperCase() + key.slice(1))
 				.split(/(?=[A-Z])/).join(" ")
 		}))
+		.concat(jewelData)
 		.sort((a, b) => sortMethod === "time" ? sortByDate(a, b) : sortByPrice(a, b));
-
+	console.log(sortedEquips);
 	const EquipCard = (equip) => {
 		equip.formattedDate = formatTimeAgo(equip.date);
 

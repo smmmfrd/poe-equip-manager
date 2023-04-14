@@ -4,8 +4,15 @@ export default function CharacterData({ data }) {
 	const { name: characterName, dateCreated, ...equips } = data;
 
 	const totalCost = Object.keys(equips).reduce((total, key) => {
-		const equipCost = equips[key].cost
-		total[equipCost.currency] += parseInt(equipCost.amount);
+		if (key !== "jewels") {
+			const equipCost = equips[key].cost
+			total[equipCost.currency] += parseInt(equipCost.amount);
+		} else {
+			// Jewels are an array
+			equips[key].forEach((jewel) => {
+				total[jewel.cost.currency] += parseInt(jewel.cost.amount);
+			});
+		}
 		return total;
 	}, { a: 0, c: 0, e: 0, d: 0 });
 
