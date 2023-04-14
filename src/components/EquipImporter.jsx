@@ -24,16 +24,29 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage, chi
 			.filter((line) => line !== "")
 			.filter((line, index) => index < 3);
 
-		const item = {
+		var item = {
 			id: new Date().getTime(),
-			slot: data[0].replace('Item Class: ', ''),
-			rarity: data[1].replace('Rarity: ', ''),
-			name: data[2],
 			cost: {
 				currency: e.target.currency.value,
 				amount: e.target.amount.value,
 			},
 			date: new Date(),
+		}
+
+		if (data[2].includes("Jewel")) {
+			item = {
+				...item,
+				slot: 'Jewel',
+				rarity: data[0].replace('Rarity: ', ''),
+				name: data[1],
+			}
+		} else {
+			item = {
+				...item,
+				slot: data[0].replace('Item Class: ', ''),
+				rarity: data[1].replace('Rarity: ', ''),
+				name: data[2],
+			}
 		}
 
 		newEquip(item);

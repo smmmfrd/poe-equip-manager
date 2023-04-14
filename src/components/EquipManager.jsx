@@ -76,6 +76,11 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 					...state,
 					leftRing: action.item
 				}
+			case "Jewel": 
+				return {
+					...state,
+					jewels: state.jewels ? [...state.jewels, action.item] : [action.item]
+				}
 			case "Remove Dilemna":
 				var { dilemnaEquip, ...newState } = state;
 				return newState;

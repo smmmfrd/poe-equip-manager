@@ -7,6 +7,10 @@ Prices:
 
 -----       -----
 
+Rarity: Rare
+Viper Creed
+Viridian Jewel
+
 Item Class: Helmets
 Rarity: Rare
 Miracle Keep
