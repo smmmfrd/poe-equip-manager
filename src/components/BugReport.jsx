@@ -1,7 +1,67 @@
-import { forwardRef } from "react"
+import { useState, useEffect, forwardRef } from "react"
+
+/* 
+	Netlify Stateful Form - Also need a duplicate shell form in index.html
+*/
 
 const BugReport = forwardRef(function BugReport(props, ref) {
 	const { close } = props;
+
+	const [formData, setFormData] = useState({
+		message: ""
+	});
+
+	const handleChange = e => {
+		const { name, value } = e.target;
+		setFormData(prevForm => ({
+			...prevForm,
+			[name]: value
+		}))
+	}
+
+	const [errors, setErrors] = useState({});
+
+	const validate = (formData) => {
+		let formErrors = {};
+		if(!formData.message) {
+			formData.message = "Bug Detail is Required";
+		}
+		return formErrors;
+	}
+
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
+	const handleSubmit = e => {
+		setErrors(validate(formData));
+		setIsSubmitted(true);
+		e.preventDefault();
+	}
+
+	const encode = data => {
+		return Object.keys(data)
+			.map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+			.join('&');
+	}
+
+	// Post to Netlify
+	useEffect(() => {
+		if(Object.keys(errors).length === 0 && isSubmitted) {
+			fetch("/", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: encode({"form-name": "bug report", ...formData})
+			})
+				.then(() => alert("Bug Submitted!"))
+				.then(() => {
+					setIsSubmitted(false);
+					setFormData({message: ""});
+				})
+				.catch(err => alert(err));
+		}
+	}, [errors, formData, isSubmitted]);
+
 	return (
 		<dialog ref={ref}
 			className="rounded-2xl relative px-12 pt-1 pb-10">
@@ -13,8 +73,8 @@ const BugReport = forwardRef(function BugReport(props, ref) {
 			<h2 className="mt-0.5 mb-4 text-4xl bold">Report a Bug</h2>
 
 			{/* Netlify Form */}
-			<form name="bug-report" method="post" data-netlify="true" onSubmit="submit" data-netlify-honeypot="bot-field"
-				className="flex-grow flex flex-col gap-6">
+			<form className="flex-grow flex flex-col gap-6"
+				onSubmit={handleSubmit}>
 				{/* Netlify form stuff */}
 				<input type="hidden" name="form-name" value="bug-report" />
 
@@ -24,7 +84,11 @@ const BugReport = forwardRef(function BugReport(props, ref) {
 
 				<label><span className="text-xl">Bug Description:</span>
 					<textarea name="message" rows="6" cols="54" required
-						className="mt-1 block textarea textarea-accent resize-none"></textarea>
+						className="mt-1 block textarea textarea-accent resize-none"
+						value={formData.message}
+						onChange={handleChange}
+					></textarea>
+					{errors.message && <p>{errors.message}</p>}
 				</label>
 				<button type="submit"
 					className="btn">Send</button>
