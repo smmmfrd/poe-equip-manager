@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import CharacterSelect from "./components/CharacterSelect";
 import EquipManager from "./components/EquipManager";
+import { AiFillBug } from "react-icons/ai"
 
 export function newCharacter(name) {
 	return {
@@ -15,7 +16,7 @@ export default function App() {
 	const [darkMode, setDarkMode] = useState(true);
 
 	useEffect(() => {
-		document.querySelector('html').setAttribute('data-theme', darkMode ? 'luxury' : 'fantasy');
+		document.querySelector('html').setAttribute('data-theme', darkMode ? 'luxury' : 'bumblebee');
 	}, [darkMode]);
 
 	function characterChosen(name) {
@@ -36,7 +37,7 @@ export default function App() {
 		<>
 			<header className="bg-neutral-content text-neutral px-4 py-2 flex justify-between">
 				<h1 className="text-4xl font-bold">PoE Equip Manager</h1>
-				<nav>
+				<nav className="flex flex-row-reverse gap-2">
 					<button
 						className="btn btn-square btn-ghost text-sm p-2.5"
 						onClick={() => setDarkMode(prev => !prev)}
@@ -60,8 +61,9 @@ export default function App() {
 							></path>
 						</svg>
 					</button>
-					<button>
-						
+					<button className="btn btn-square btn-ghost"
+						title="Report a Bug">
+						<AiFillBug className="w-5 h-5"/>
 					</button>
 				</nav>
 			</header>
