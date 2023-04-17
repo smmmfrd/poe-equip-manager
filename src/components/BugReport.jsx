@@ -13,10 +13,14 @@ const BugReport = forwardRef(function BugReport(props, ref) {
 			<h2 className="mt-0.5 mb-4 text-4xl bold">Report a Bug</h2>
 
 			{/* Netlify Form */}
-			<form name="bug-report" data-netlify="true" netlify-honeypot="bot-field"
+			<form name="bug-report" method="post" data-netlify="true" onSubmit="submit" data-netlify-honeypot="bot-field"
 				className="flex-grow flex flex-col gap-6">
 				{/* Netlify form stuff */}
 				<input type="hidden" name="form-name" value="bug-report" />
+
+				<div hidden>
+					<input name="bot-field" />
+				</div>
 
 				<label><span className="text-xl">Bug Description:</span>
 					<textarea name="message" rows="6" cols="54" required
