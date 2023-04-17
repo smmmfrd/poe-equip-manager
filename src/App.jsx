@@ -78,6 +78,10 @@ export default function App() {
 					/>
 				}
 			</main>
+			<footer className={`w-full py-1 bg-neutral-content text-neutral text-center
+				${Object.keys(character).length > 0 ? "" : "absolute bottom-0"} `}>
+				&copy; <a href="https://github.com/smmmfrd" target="_blank" rel="nooponer noreferrer">smmmfrd</a> 2023
+			</footer>
 		</>
 	);
 } 
