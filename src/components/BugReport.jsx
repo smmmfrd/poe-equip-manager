@@ -35,6 +35,7 @@ const BugReport = forwardRef(function BugReport(props, ref) {
 		setErrors(validate(formData));
 		setIsSubmitted(true);
 		e.preventDefault();
+		close();
 	}
 
 	const encode = data => {
