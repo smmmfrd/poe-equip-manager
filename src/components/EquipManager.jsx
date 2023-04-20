@@ -197,7 +197,8 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				</button>
 			</EquipImporter>
 
-			<div className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
+			{/* Equip Display */}
+			<section className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
 				{/* MAIN HAND */}
 				<div className="">
 					<button className="btn btn-outline w-double h-quad"
@@ -301,7 +302,18 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 						{equips.belt ? equips.belt.name : "No Belt"}
 					</button>
 				</div>
-			</div>
+
+			</section>
+			
+			<section className="flex flex-wrap gap-4">
+			{equips.jewels && equips.jewels.map(jewel =>
+				<button className="btn btn-outline btn-square btn-lg text-sm"
+					onClick={() => handleEquipClick(jewel.id)}
+				>
+					{jewel.name}
+				</button>
+			)}
+			</section>
 
 			<CharacterData data={equips} />
 
