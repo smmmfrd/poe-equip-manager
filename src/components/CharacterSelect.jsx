@@ -87,18 +87,20 @@ export default function CharacterSelect({ characterChosen }) {
 
 	return (
 		<>
-			<dialog ref={createMenu} className="rounded-2xl relative pt-4 pb-10 px-6">
+			<dialog ref={createMenu} className="w-1/2 rounded-2xl relative py-2 px-6">
 				{/* CLOSE BUTTON */}
 				<button
 					title="Cancel"
-					className="btn btn-circle btn-outline btn-sm absolute top-2 left-2"
+					className="btn btn-circle btn-outline btn-sm absolute top-2 right-2"
 					onClick={closeCreateMenu}>
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
 				</button>
 
-				<form onSubmit={characterCreate} className="flex flex-col items-center">
-					<h2 className="text-base-content text-3xl underline bold mb-8">Add a Character</h2>
-					<label className="flex flex-col items-center">
+				<h2 className="text-base-content text-3xl bold">Add a Character</h2>
+				<div className="divider"></div>
+
+				<form onSubmit={characterCreate} className="flex flex-col items-start">
+					<label className="flex flex-col text-left">
 						<span className="block text-xl text-base-content">
 							Name:
 						</span>
@@ -111,15 +113,26 @@ export default function CharacterSelect({ characterChosen }) {
 							placeholder=""
 							className="input peer"
 						/>
-						<p className="peer-invalid:visible invisible w-56 text-center text-warning pt-1 pb-4">
+						<p className="peer-invalid:visible invisible w-full text-error pt-1 pb-4">
 							Please enter a valid name, 7-23 characters only.
 						</p>
 					</label>
-					<button
-						title="Create"
-						type="submit"
-						className="btn">
-						Create Character</button>
+					<div className="divider"></div>
+					<div className="w-full flex gap-6 items-end">
+						<button
+							title="Create"
+							type="submit"
+							className="btn btn-info">
+							Create Character</button>
+						<button
+							title="Close Window"
+							type="button"
+							className="btn"
+							onClick={() => closeCreateMenu()}
+						>
+							Cancel
+						</button>
+					</div>
 				</form>
 			</dialog>
 
