@@ -33,7 +33,15 @@ export default function EquipImporter({ handleOpen, newEquip, buttonMessage, chi
 			date: new Date(),
 		}
 
-		if (data[2].includes("Jewel")) {
+		if (data[0].includes("Jewel")) {
+			item = {
+				...item,
+				slot: 'Jewel',
+				rarity: data[1].replace('Rarity: ', ''),
+				name: data[2],
+			}
+		}
+		else if (data[2].includes("Jewel")) {
 			item = {
 				...item,
 				slot: 'Jewel',
