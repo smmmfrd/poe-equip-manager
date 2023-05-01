@@ -160,7 +160,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				}
 				return;
 			case "off hand":
-				if (currentEquip.slot.includes("One Hand")|| currentEquip.slot.includes('Sceptres')) {
+				if (currentEquip.slot.includes("One Hand") || currentEquip.slot.includes('Sceptres')) {
 					dispatch({ slot: "Off Hand", item: currentEquip });
 					setCurrentEquip({});
 				}
@@ -304,15 +304,23 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				</div>
 
 			</section>
-			
-			<section className="flex flex-wrap gap-4">
-			{equips.jewels && equips.jewels.map(jewel =>
-				<button className="btn btn-outline btn-square btn-lg text-sm"
-					onClick={() => handleEquipClick(jewel.id)}
-				>
-					{jewel.name}
-				</button>
-			)}
+
+			{/* JEWEL DISPLAY */}
+			<section className="w-full px-16">
+				<header className="text-left mb-4">
+					<h3 className="text-xl bold underline">Jewels</h3>
+				</header>
+				<ul className="flex flex-wrap gap-4 px-4">
+					{equips.jewels && equips.jewels.map(jewel =>
+						<li key={jewel.id}>
+							<button className="btn btn-outline btn-square btn-lg text-sm"
+								onClick={() => handleEquipClick(jewel.id)}
+							>
+								{jewel.name}
+							</button>
+						</li>
+					)}
+				</ul>
 			</section>
 
 			<CharacterData data={equips} />
