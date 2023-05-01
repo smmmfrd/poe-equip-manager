@@ -5,7 +5,7 @@ import EquipImporter from "./EquipImporter";
 import EquipViewer from "./EquipViewer";
 
 function validEquip(equip) {
-	return equip.slot.includes('One Hand') || equip.slot.includes('Rings');
+	return equip.slot.includes('One Hand') || equip.slot.includes('Rings') || equip.slot.includes('Sceptres');
 }
 
 export default function EquipManager({ currentCharacter, closeCharacter }) {
@@ -113,7 +113,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 			} else if (equips.dilemnaEquip.slot.includes('Two Hand')) {
 				dispatch({ slot: "Main Hand", item: equips.dilemnaEquip });
 			} else {
-				console.log(equips.dilemnaEquip);
+				// console.log(equips.dilemnaEquip);
 				setError('Error: Invalid Item Detected');
 				displayError();
 			}
@@ -154,13 +154,13 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 
 		switch (choice) {
 			case "main hand":
-				if (currentEquip.slot.includes("One Hand")) {
+				if (currentEquip.slot.includes("One Hand") || currentEquip.slot.includes('Sceptres')) {
 					dispatch({ slot: "Main Hand", item: currentEquip });
 					setCurrentEquip({});
 				}
 				return;
 			case "off hand":
-				if (currentEquip.slot.includes("One Hand")) {
+				if (currentEquip.slot.includes("One Hand")|| currentEquip.slot.includes('Sceptres')) {
 					dispatch({ slot: "Off Hand", item: currentEquip });
 					setCurrentEquip({});
 				}
@@ -202,7 +202,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* MAIN HAND */}
 				<div className="">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={currentEquip.name && !currentEquip.slot.includes('One Hand')}
+						disabled={currentEquip.name && !(currentEquip.slot.includes('One Hand') || currentEquip.slot.includes('Sceptres'))}
 						onClick={() => currentEquip.name ? handleChoiceInput("main hand") :
 							equips.mainHand ? handleEquipClick(equips.mainHand.id) : null}
 					>
@@ -223,7 +223,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* OFF HAND */}
 				<div className="col-start-7">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={currentEquip.name && !currentEquip.slot.includes('One Hand')}
+						disabled={currentEquip.name && !(currentEquip.slot.includes('One Hand') || currentEquip.slot.includes('Sceptres'))}
 						onClick={() => currentEquip.name ? handleChoiceInput("off hand") :
 							equips.offHand ? handleEquipClick(equips.offHand.id) : null}
 					>

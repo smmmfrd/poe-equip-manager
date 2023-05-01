@@ -7,6 +7,10 @@ Prices:
 
 -----       -----
 
+Item Class: Sceptres
+Rarity: Rare
+Corruption Roar
+
 Item Class: Abyss Jewels
 Rarity: Rare
 Foul Vision
