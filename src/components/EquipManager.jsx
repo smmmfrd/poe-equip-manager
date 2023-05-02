@@ -46,7 +46,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 					amulet: action.item
 				};
 			case "Main Hand":
-			case "Bow":
+			case "Bows":
 			case "Staves":
 				if (action.item.slot.includes("Two Hand") || action.item.slot === "Staves") {
 					const { offHand, ...newState } = state;
