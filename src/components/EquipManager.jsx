@@ -199,10 +199,13 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 
 			{/* Equip Display */}
 			<section className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
+				
 				{/* MAIN HAND */}
 				<div className="">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={currentEquip.name && !(currentEquip.slot.includes('One Hand') || currentEquip.slot.includes('Sceptres'))}
+						disabled={equips.mainHand ? currentEquip.name &&
+							!(currentEquip.slot.includes('One Hand')
+								|| currentEquip.slot.includes('Sceptres')) : true}
 						onClick={() => currentEquip.name ? handleChoiceInput("main hand") :
 							equips.mainHand ? handleEquipClick(equips.mainHand.id) : null}
 					>
@@ -213,7 +216,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* HELMET */}
 				<div className="col-start-4">
 					<button className="btn btn-outline w-double h-double"
-						disabled={currentEquip.name}
+						disabled={equips.helmet ? currentEquip.name : true}
 						onClick={() => equips.helmet ? handleEquipClick(equips.helmet.id) : null}
 					>
 						{equips.helmet ? equips.helmet.name : "No Helmet"}
@@ -223,7 +226,8 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* OFF HAND */}
 				<div className="col-start-7">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={currentEquip.name && !(currentEquip.slot.includes('One Hand') || currentEquip.slot.includes('Sceptres'))}
+						disabled={equips.offHand ? currentEquip.name && 
+							!(currentEquip.slot.includes('One Hand') || currentEquip.slot.includes('Sceptres')) : true}
 						onClick={() => currentEquip.name ? handleChoiceInput("off hand") :
 							equips.offHand ? handleEquipClick(equips.offHand.id) : null}
 					>
@@ -234,7 +238,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* BODY ARMOUR */}
 				<div className="row-start-3 col-start-4">
 					<button className="btn btn-outline w-double h-triple"
-						disabled={currentEquip.name}
+						disabled={equips.bodyArmour ? currentEquip.name : true}
 						onClick={() => equips.bodyArmour ? handleEquipClick(equips.bodyArmour.id) : null}
 					>
 						{equips.bodyArmour ? equips.bodyArmour.name : "No Body Armour"}
@@ -244,7 +248,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* AMULET */}
 				<div className="row-start-3 col-start-6">
 					<button className="btn btn-outline w-full h-full"
-						disabled={currentEquip.name}
+						disabled={equips.amulet ? currentEquip.name : true}
 						onClick={() => equips.amulet ? handleEquipClick(equips.amulet.id) : null}
 					>
 						{equips.amulet ? equips.amulet.name : "No Amulet"}
@@ -254,7 +258,8 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* LEFT RING */}
 				<div className="row-start-4 col-start-3">
 					<button className="btn btn-outline w-full h-full"
-						disabled={currentEquip.name && !currentEquip.slot.includes('Rings')}
+						disabled={equips.leftRing ? currentEquip.name && 
+							!currentEquip.slot.includes('Rings') : true}
 						onClick={() => currentEquip.name ? handleChoiceInput("left ring") :
 							equips.leftRing ? handleEquipClick(equips.leftRing.id) : null}
 					>
@@ -265,7 +270,8 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* RIGHT RING */}
 				<div className="row-start-4 col-start-6">
 					<button className="btn btn-outline w-full h-full"
-						disabled={currentEquip.name && !currentEquip.slot.includes('Rings')}
+						disabled={equips.rightRing ? currentEquip.name &&
+							!currentEquip.slot.includes('Rings') : true}
 						onClick={() => currentEquip.name ? handleChoiceInput("right ring") :
 							equips.rightRing ? handleEquipClick(equips.rightRing.id) : null}
 					>
@@ -276,7 +282,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* GLOVES */}
 				<div className="row-start-5 col-start-2">
 					<button className="btn btn-outline w-double h-double"
-						disabled={currentEquip.name}
+						disabled={equips.glove ? currentEquip.name : true}
 						onClick={() => equips.glove ? handleEquipClick(equips.glove.id) : null}
 					>
 						{equips.glove ? equips.glove.name : "No Gloves"}
@@ -286,7 +292,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* BOOTS */}
 				<div className="row-start-5 col-start-6">
 					<button className="btn btn-outline w-double h-double"
-						disabled={currentEquip.name}
+						disabled={equips.boot ? currentEquip.name : true}
 						onClick={() => equips.boot ? handleEquipClick(equips.boot.id) : null}
 					>
 						{equips.boot ? equips.boot.name : "No Boots"}
@@ -296,7 +302,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* BELT */}
 				<div className="row-start-6 col-start-4">
 					<button className="btn btn-outline w-double h-full"
-						disabled={currentEquip.name}
+						disabled={equips.belt ? currentEquip.name : true}
 						onClick={() => equips.belt ? handleEquipClick(equips.belt.id) : null}
 					>
 						{equips.belt ? equips.belt.name : "No Belt"}
