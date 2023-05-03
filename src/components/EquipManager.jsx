@@ -180,6 +180,18 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 		document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "end" });
 	}
 
+	function slotDisabled(slotName, ...validChecks) {
+		// console.log(validChecks)
+
+		// There is no current equip that matches it's type
+		if(currentEquip.name) {
+			return !validChecks.some(check => currentEquip.slot.includes(check));
+		}
+
+		// There is no equip in it's slot
+		return !equips[slotName];
+	}
+
 	return (
 		<>
 			<EquipError error={error} />
@@ -199,13 +211,11 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 
 			{/* Equip Display */}
 			<section className="grid grid-cols-8 grid-rows-6 gap-4 [&>*]:w-16 [&>*]:h-16">
-				
+
 				{/* MAIN HAND */}
 				<div className="">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={equips.mainHand ? currentEquip.name &&
-							!(currentEquip.slot.includes('One Hand')
-								|| currentEquip.slot.includes('Sceptres')) : true}
+						disabled={slotDisabled("mainHand", "One Hand", "Sceptres")}
 						onClick={() => currentEquip.name ? handleChoiceInput("main hand") :
 							equips.mainHand ? handleEquipClick(equips.mainHand.id) : null}
 					>
@@ -226,8 +236,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* OFF HAND */}
 				<div className="col-start-7">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={equips.offHand ? currentEquip.name && 
-							!(currentEquip.slot.includes('One Hand') || currentEquip.slot.includes('Sceptres')) : true}
+						disabled={slotDisabled("offHand", "One Hand", "Sceptres")}
 						onClick={() => currentEquip.name ? handleChoiceInput("off hand") :
 							equips.offHand ? handleEquipClick(equips.offHand.id) : null}
 					>
@@ -258,8 +267,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* LEFT RING */}
 				<div className="row-start-4 col-start-3">
 					<button className="btn btn-outline w-full h-full"
-						disabled={equips.leftRing ? currentEquip.name && 
-							!currentEquip.slot.includes('Rings') : true}
+						disabled={slotDisabled("leftRing", "Rings")}
 						onClick={() => currentEquip.name ? handleChoiceInput("left ring") :
 							equips.leftRing ? handleEquipClick(equips.leftRing.id) : null}
 					>
@@ -270,8 +278,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* RIGHT RING */}
 				<div className="row-start-4 col-start-6">
 					<button className="btn btn-outline w-full h-full"
-						disabled={equips.rightRing ? currentEquip.name &&
-							!currentEquip.slot.includes('Rings') : true}
+						disabled={slotDisabled("rightRing", "Rings")}
 						onClick={() => currentEquip.name ? handleChoiceInput("right ring") :
 							equips.rightRing ? handleEquipClick(equips.rightRing.id) : null}
 					>
