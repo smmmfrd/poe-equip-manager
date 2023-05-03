@@ -24,7 +24,7 @@ export default function CharacterData({ data }) {
 			</header>
 			<div className="basis-1/4">
 				<h3 className="text-2xl underline">Total Cost</h3>
-				<div className="text-right grid grid-cols-2 gap-0 items-end">
+				<div className="">
 					{totalCost.a > 0 && <p>{totalCost.a} Alch</p>}
 					{totalCost.c > 0 && <p>{totalCost.c} Chaos</p>}
 					{totalCost.e > 0 && <p>{totalCost.e} Exalted</p>}
