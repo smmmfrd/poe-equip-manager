@@ -87,7 +87,7 @@ export default function CharacterSelect({ characterChosen }) {
 
 	return (
 		<>
-			<dialog ref={createMenu} className="w-1/2 rounded-2xl relative py-2 px-6">
+			<dialog ref={createMenu} className="max-w-md rounded-2xl relative py-2 px-6">
 				{/* CLOSE BUTTON */}
 				<button
 					title="Cancel"
