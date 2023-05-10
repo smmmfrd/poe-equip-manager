@@ -7,6 +7,10 @@ Prices:
 
 -----       -----
 
+Item Class: Wands
+Rarity: Unique
+Obliteration Imbued Wand
+
 Item Class: Sceptres
 Rarity: Rare
 Corruption Roar

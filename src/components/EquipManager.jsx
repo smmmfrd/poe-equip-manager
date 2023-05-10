@@ -5,7 +5,7 @@ import EquipImporter from "./EquipImporter";
 import EquipViewer from "./EquipViewer";
 
 function validEquip(equip) {
-	return equip.slot.includes('One Hand') || equip.slot.includes('Rings') || equip.slot.includes('Sceptres');
+	return equip.slot.includes('One Hand') || equip.slot.includes('Rings') || equip.slot.includes('Sceptres') || equip.slot.includes('Wands');
 }
 
 export default function EquipManager({ currentCharacter, closeCharacter }) {
@@ -154,13 +154,13 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 
 		switch (choice) {
 			case "main hand":
-				if (currentEquip.slot.includes("One Hand") || currentEquip.slot.includes('Sceptres')) {
+				if (currentEquip.slot.includes("One Hand") || currentEquip.slot.includes('Sceptres') || currentEquip.slot.includes('Wands')) {
 					dispatch({ slot: "Main Hand", item: currentEquip });
 					setCurrentEquip({});
 				}
 				return;
 			case "off hand":
-				if (currentEquip.slot.includes("One Hand") || currentEquip.slot.includes('Sceptres')) {
+				if (currentEquip.slot.includes("One Hand") || currentEquip.slot.includes('Sceptres') || currentEquip.slot.includes('Wands')) {
 					dispatch({ slot: "Off Hand", item: currentEquip });
 					setCurrentEquip({});
 				}
@@ -216,7 +216,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* MAIN HAND */}
 				<div className="">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={slotDisabled("mainHand", "One Hand", "Sceptres")}
+						disabled={slotDisabled("mainHand", "One Hand", "Sceptres", "Wands")}
 						onClick={() => currentEquip.name ? handleChoiceInput("main hand") :
 							equips.mainHand ? handleEquipClick(equips.mainHand.id) : null}
 					>
@@ -237,7 +237,7 @@ export default function EquipManager({ currentCharacter, closeCharacter }) {
 				{/* OFF HAND */}
 				<div className="col-start-7">
 					<button className="btn btn-outline w-double h-quad"
-						disabled={slotDisabled("offHand", "One Hand", "Sceptres")}
+						disabled={slotDisabled("offHand", "One Hand", "Sceptres", "Wands")}
 						onClick={() => currentEquip.name ? handleChoiceInput("off hand") :
 							equips.offHand ? handleEquipClick(equips.offHand.id) : null}
 					>
